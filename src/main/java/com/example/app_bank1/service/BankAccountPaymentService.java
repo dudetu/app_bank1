@@ -21,7 +21,7 @@ public class BankAccountPaymentService {
 //        BankAccountPayment payment = null;
 //        savedPayment = bankAccountPaymentRepository.save(payment);
 //    }
-
+//new
     public List<BankAccountPayment> getAllPayments() {
         return bankAccountPaymentRepository.findAll();
     }
