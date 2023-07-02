@@ -14,18 +14,14 @@ import java.util.List;
 @Repository
 public interface IbanPaymentRepository extends JpaRepository<IbanPayment, Long> {
 
-    // Пользовательский метод для получения платежей по IBAN
     // Custom method to retrieve payments by IBAN
     List<IbanPayment> findByIban(String iban);
 
-    // Пользовательский запрос для получения платежей по сумме, превышающей заданное значение
     // Custom query to retrieve payments by amount greater than a given value
 
     @Query("SELECT p FROM IbanPayment p WHERE p.amount > :minAmount")
     List<IbanPayment> findByAmountGreaterThan(@Param("minAmount") BigDecimal minAmount);
 
-    // Добавьте другие пользовательские методы или запросы в соответствии с вашими требованиями
-    // Add other custom methods or queries as per your requirements
 
 }
 

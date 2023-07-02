@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "account_transfers")
@@ -27,7 +28,6 @@ public class AccountTransfer {
 
     @Column(name = "amount")
     private BigDecimal amount;
-
 
 
 }

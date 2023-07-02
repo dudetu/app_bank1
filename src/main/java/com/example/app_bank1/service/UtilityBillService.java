@@ -23,8 +23,11 @@ public class UtilityBillService {
         utilityBillRepository.save(utilityBill);
     }
 
-    // Другие методы для работы с коммунальными платежами
-    // Other methods for dealing with utility payments
+
+    public void setUtilityBills(List<UtilityBill> utilityBills) {
+    }
+
+
 }
 
 

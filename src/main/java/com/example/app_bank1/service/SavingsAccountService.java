@@ -23,8 +23,8 @@ public class SavingsAccountService {
     }
 
     public SavingsAccount createSavingsAccount(SavingsAccount savingsAccount) {
-        // Дополнительная логика, если требуется
-       // Additional logic if required
+
+        // Additional logic if required
 
         return savingsAccountRepository.save(savingsAccount);
     }
@@ -34,8 +34,8 @@ public class SavingsAccountService {
         SavingsAccount existingAccount = savingsAccountRepository.findById(id)
                 .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
 
-        // Обновление полей счета
-       // Updating account fields
+
+        // Updating account fields
 
         return savingsAccountRepository.save(existingAccount);
     }
@@ -45,7 +45,7 @@ public class SavingsAccountService {
         SavingsAccount existingAccount = savingsAccountRepository.findById(id)
                 .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
 
-        //Дополнительная логика перед удалением аккаунта
+
         //Additional logic before deleting an account
 
 

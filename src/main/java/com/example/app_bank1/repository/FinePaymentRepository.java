@@ -12,7 +12,6 @@ public interface FinePaymentRepository extends JpaRepository<FinePayment, Long> 
     // Method for saving the fine payment
     FinePayment save(FinePayment finePayment);
 
-    // Other methods for fine payment repository
 
 }
 

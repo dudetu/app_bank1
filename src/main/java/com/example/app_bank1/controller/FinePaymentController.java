@@ -8,28 +8,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-    @RequestMapping("/fine-payments")
-    public class FinePaymentController {
+@RequestMapping("/fine-payments")
+public class FinePaymentController {
 
-        private final FinePaymentService finePaymentService;
+    private final FinePaymentService finePaymentService;
 
-        public FinePaymentController(FinePaymentService finePaymentService) {
-            this.finePaymentService = finePaymentService;
-        }
-
-        @GetMapping
-        public List<FinePayment> getAllPayments() {
-            return finePaymentService.getAllPayments();
-        }
-
-        @PostMapping
-        public ResponseEntity<String> makePayment(@RequestBody FinePayment finePayment) {
-      //      finePaymentService.makePayment(finePayment);
-            return ResponseEntity.ok("Fine payment successful");
-        }
-
-        // Другие методы для обработки оплаты штрафов
+    public FinePaymentController(FinePaymentService finePaymentService) {
+        this.finePaymentService = finePaymentService;
     }
+
+    @GetMapping
+    public List<FinePayment> getAllPayments() {
+        return finePaymentService.getAllPayments();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> makePayment(@RequestBody FinePayment finePayment) {
+        //      finePaymentService.makePayment(finePayment);
+        return ResponseEntity.ok("Fine payment successful");
+    }
+
+}
 
 
 

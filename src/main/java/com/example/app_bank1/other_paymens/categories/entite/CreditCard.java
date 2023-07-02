@@ -1,4 +1,4 @@
-package com.example.app_bank1.entites.account;
+package com.example.app_bank1.other_paymens.categories.entite;
 
 import jakarta.persistence.*;
 import lombok.Data;

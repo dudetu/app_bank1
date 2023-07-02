@@ -1,55 +1,50 @@
 package com.example.app_bank1.service;
 
+import com.example.app_bank1.account.PaymentApiResponse;
 import com.example.app_bank1.other_paymens.categories.BankAccountPayment;
-import com.example.app_bank1.controller.PaymentApiResponse;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.example.app_bank1.repository.BankAccountPaymentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.example.app_bank1.repository.BankAccountPaymentRepository;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
 public class BankAccountPaymentService {
 
     private final BankAccountPaymentRepository bankAccountPaymentRepository;
+    private final RestTemplate restTemplate;
 
-//  //  public BankAccountPaymentService(BankAccountPaymentRepository bankAccountPaymentRepository) {
-//        this.bankAccountPaymentRepository = bankAccountPaymentRepository;
-//        BankAccountPayment payment = null;
-//        savedPayment = bankAccountPaymentRepository.save(payment);
-//    }
-//new
+    public BankAccountPaymentService(BankAccountPaymentRepository bankAccountPaymentRepository, RestTemplate restTemplate) {
+        this.bankAccountPaymentRepository = bankAccountPaymentRepository;
+        this.restTemplate = restTemplate;
+    }
+
     public List<BankAccountPayment> getAllPayments() {
         return bankAccountPaymentRepository.findAll();
     }
 
     public void makePayment(BankAccountPayment bankAccountPayment) {
-
         bankAccountPaymentRepository.save(bankAccountPayment);
+
+        String apiUrl = "https://api.payment-system.com/payments";
+
+        // Initialize and populate paymentRequest before using
+        // Object paymentRequest = ...
+
+        try {
+            Object paymentRequest = null;
+            PaymentApiResponse response = restTemplate.postForObject(apiUrl, paymentRequest, PaymentApiResponse.class);
+
+            // Process the response from the payment system API if needed
+        } catch (Exception e) {
+
+            // Handle the exception when calling the payment system API
+        }
     }
-
-    RestTemplate restTemplate = new RestTemplate();
-    String apiUrl = "https://api.payment-system.com/payments";
-    private Object paymentRequest;
-    // Вызов API платежной системы для осуществления платежа
-    //   Например :
-
-    // Call the API of the payment system to make a payment
-    // For example :
-
-    //  RestTemplate restTemplate = new RestTemplate();
-    // String apiUrl = "https://api.payment-system.com/payments";
-    PaymentApiResponse response = restTemplate.postForObject(apiUrl, paymentRequest, PaymentApiResponse.class);
-
-
-    // Сохранение информации о платеже в базу данных
-    BankAccountPayment savedPayment;
-
-
 }
+
+
+
     
 
 

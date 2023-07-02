@@ -22,6 +22,9 @@ import java.math.BigDecimal;
         private BigDecimal amount;
 
 
+    public boolean isSuccessful() {
+        return false;
     }
+}
 
 

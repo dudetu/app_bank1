@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CreditCardTopUpRepository extends JpaRepository<CreditCardTopUp, Long> {
-    // Пример метода для поиска пополнений кредитной карты по номеру карты
+
     // An example of a method to search for credit card deposits by card number
 
     List<CreditCardTopUp> findByCreditCardNumber(String creditCardNumber);

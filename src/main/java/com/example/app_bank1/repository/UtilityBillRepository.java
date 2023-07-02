@@ -12,16 +12,14 @@ import java.util.List;
 @Repository
 public interface UtilityBillRepository extends JpaRepository<UtilityBill, Long> {
 
-    // Пользовательский метод для получения счетов за коммунальные услуги по номеру счета
     // Custom method to retrieve utility bills by bill number
 
     UtilityBill findByBillNumber(String billNumber);
 
-    // Пользовательский метод для получения счетов за коммунальные услуги на сумму, превышающую заданное значение
     // Custom method to retrieve utility bills by amount greater than a given value
     List<UtilityBill> findByAmountGreaterThan(BigDecimal amount);
 
-    // Add other custom methods as per your requirements
+
 
 }
 
