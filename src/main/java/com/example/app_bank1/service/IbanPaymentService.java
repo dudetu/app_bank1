@@ -23,7 +23,7 @@ public class IbanPaymentService {
 
     public void processPayment(IbanPayment payment) {
 
-        // Реализуйте логику обработки платежа с помощью API
+
         // Implement the logic for processing the payment using the API
         // Save the payment information to the database
         ibanPaymentRepository.save(payment);

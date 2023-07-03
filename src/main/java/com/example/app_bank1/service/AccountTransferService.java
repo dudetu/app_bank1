@@ -57,8 +57,7 @@ public class AccountTransferService {
     }
 
     public void receiveTransfer(String sourceAccount, String destinationAccount, BigDecimal amount) {
-        // Логика получения перевода с другого банковского счета
-        // Сохранение информации о переводе в базу данных
+
 
         // Logic for receiving a transfer from another bank account
         // Saving information about the translation to the database
