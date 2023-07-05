@@ -1,7 +1,5 @@
 package com.example.app_bank1.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.app_bank1.other_paymens.categories.FinePayment;
 import com.example.app_bank1.service.FinePaymentService;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,27 +30,29 @@ class FinePaymentControllerTest {
 
     @Test
     void getAllPayments_ReturnsListOfPayments() {
+        // Упорядочить
         // Arrange
         List<FinePayment> payments = new ArrayList<>();
         payments.add(new FinePayment());
         payments.add(new FinePayment());
         when(finePaymentService.getAllPayments()).thenReturn(payments);
-
+        // Действие
         // Act
         List<FinePayment> result = finePaymentController.getAllPayments();
-
+        // Проверить
         // Assert
         assertEquals(payments.size(), result.size());
     }
 
     @Test
     void makePayment_ReturnsSuccessfulResponse() {
+        // Упорядочить
         // Arrange
         FinePayment finePayment = new FinePayment();
-
+        // Действие
         // Act
         ResponseEntity<String> result = finePaymentController.makePayment(finePayment);
-
+        // Проверить
         // Assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals("Fine payment successful", result.getBody());

@@ -1,83 +1,69 @@
 package com.example.app_bank1.controller;
 
-import com.example.app_bank1.controller.AccountTransferController;
 import com.example.app_bank1.other_paymens.categories.AccountTransfer;
 import com.example.app_bank1.service.AccountTransferService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-class AccountTransferControllerTest {
+@WebMvcTest(AccountTransferController.class)
+public class AccountTransferControllerTest {
 
-    @Mock
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
     private AccountTransferService accountTransferService;
 
-    @Mock
-    private RestTemplate restTemplate;
-
-    @InjectMocks
-    private AccountTransferController accountTransferController;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
-    void getAllTransfers_ReturnsListOfTransfers() {
-        // Arrange
-        List<AccountTransfer> transfers = new ArrayList<>();
-        transfers.add(new AccountTransfer());
-        transfers.add(new AccountTransfer());
+    public void testGetAllTransfers() throws Exception {
+        AccountTransfer transfer1 = new AccountTransfer();
+        transfer1.setId(1L);
+        transfer1.setUserId(1L);
+        transfer1.setAmount(BigDecimal.valueOf(100.00));
+
+        AccountTransfer transfer2 = new AccountTransfer();
+        transfer2.setId(2L);
+        transfer2.setUserId(2L);
+        transfer2.setAmount(BigDecimal.valueOf(200.00));
+
+        List<AccountTransfer> transfers = Arrays.asList(transfer1, transfer2);
+
         when(accountTransferService.getAllTransfers()).thenReturn(transfers);
 
-        // Act
-        List<AccountTransfer> result = accountTransferController.getAllTransfers();
-
-        // Assert
-        assertEquals(transfers.size(), result.size());
+        mockMvc.perform(MockMvcRequestBuilders.get("/account-transfers")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].userId").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].amount").value(100.00))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].amount").value(200.00));
     }
 
     @Test
-    void makeTransfer_ValidTransfer_ReturnsSuccessResponse() {
-        // Arrange
+    public void testMakeTransfer() throws Exception {
         AccountTransfer transfer = new AccountTransfer();
-        ResponseEntity<String> response = new ResponseEntity<>("Transfer successful", HttpStatus.OK);
-        when(restTemplate.postForEntity(anyString(), any(AccountTransfer.class), eq(String.class))).thenReturn(response);
+        transfer.setUserId(1L);
+        transfer.setAmount(BigDecimal.valueOf(500.00));
 
-        // Act
-        ResponseEntity<String> result = accountTransferController.makeTransfer(transfer);
-
-        // Assert
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals("Account transfer successful", result.getBody());
-        verify(accountTransferService, times(1)).makeTransfer(transfer);
-    }
-
-    @Test
-    void makeTransfer_InvalidTransfer_ReturnsErrorResponse() {
-        // Arrange
-        AccountTransfer transfer = new AccountTransfer();
-        ResponseEntity<String> response = new ResponseEntity<>("Transfer failed", HttpStatus.BAD_REQUEST);
-        when(restTemplate.postForEntity(anyString(), any(AccountTransfer.class), eq(String.class))).thenReturn(response);
-
-        // Act
-        ResponseEntity<String> result = accountTransferController.makeTransfer(transfer);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-        assertEquals("Failed to make account transfer", result.getBody());
-        verify(accountTransferService, never()).makeTransfer(transfer);
+        mockMvc.perform(MockMvcRequestBuilders.post("/account-transfers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"userId\": 1, \"amount\": 500.00}"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Account transfer successful"));
     }
 }

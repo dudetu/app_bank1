@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FinePaymentRepository extends JpaRepository<FinePayment, Long> {
-
+    // Метод сохранения оплаты штрафа
     // Method for saving the fine payment
     FinePayment save(FinePayment finePayment);
 

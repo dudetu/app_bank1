@@ -20,14 +20,15 @@ class UtilityBillRepositoryTest {
 
     @Test
     void findByBillNumber_ReturnsMatchingBill() {
+        // Упорядочить
         // Arrange
         UtilityBill bill = new UtilityBill();
         bill.setBillNumber("123456789");
         utilityBillRepository.save(bill);
-
+        // Действие
         // Act
         UtilityBill result = utilityBillRepository.findByBillNumber("123456789");
-
+        // Проверить
         // Assert
         assertNotNull(result);
         assertEquals(bill, result);
@@ -35,6 +36,7 @@ class UtilityBillRepositoryTest {
 
     @Test
     void findByAmountGreaterThan_ReturnsMatchingBills() {
+        // Упорядочить
         // Arrange
         UtilityBill bill1 = new UtilityBill();
         bill1.setAmount(new BigDecimal("1000.00"));
@@ -43,10 +45,10 @@ class UtilityBillRepositoryTest {
         UtilityBill bill2 = new UtilityBill();
         bill2.setAmount(new BigDecimal("2000.00"));
         utilityBillRepository.save(bill2);
-
+        // Действие
         // Act
         List<UtilityBill> result = utilityBillRepository.findByAmountGreaterThan(new BigDecimal("1500.00"));
-
+        // Проверить
         // Assert
         assertEquals(1, result.size());
         assertEquals(bill2, result.get(0));

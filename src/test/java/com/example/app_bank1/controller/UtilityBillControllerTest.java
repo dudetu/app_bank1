@@ -33,27 +33,29 @@ class UtilityBillControllerTest {
 
     @Test
     void getAllBills_ReturnsListOfUtilityBills() {
+        // Упорядочить
         // Arrange
         List<UtilityBill> utilityBills = new ArrayList<>();
         utilityBills.add(new UtilityBill());
         when(utilityBillRepository.findAll()).thenReturn(utilityBills); // Устанавливаем заглушку для метода findAll()
-
+        // Действие
         // Act
         List<UtilityBill> result = utilityBillController.getAllBills();
-
+        // Проверить
         // Assert
         assertEquals(utilityBills, result);
     }
 
     @Test
     void createBill_ReturnsSuccessMessage() {
+        // Упорядочить
         // Arrange
         UtilityBill utilityBill = new UtilityBill();
         when(utilityBillRepository.save(utilityBill)).thenReturn(utilityBill); // Устанавливаем заглушку для метода save()
-
+        // Действие
         // Act
         ResponseEntity<String> result = utilityBillController.createBill(utilityBill);
-
+        // Проверить
         // Assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals("Utility bill created successfully", result.getBody());

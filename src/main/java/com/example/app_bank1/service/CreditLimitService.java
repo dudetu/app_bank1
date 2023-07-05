@@ -1,4 +1,4 @@
-package com.example.app_bank1.other_paymens.categories.accumulation;
+package com.example.app_bank1.service;
 
 import com.example.app_bank1.other_paymens.categories.entite.CreditLimit;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,9 @@ public class CreditLimitService {
 
 
     public CreditLimit createCreditLimit(CreditLimit creditLimit) {
+        // Логика создания нового кредитного лимита
+        // Например, валидация данных и сохранение в базе данных
+
         // Logic of creating a new credit limit
         // For example, data validation and saving to the database
 
@@ -26,6 +29,8 @@ public class CreditLimitService {
     }
 
     public CreditLimit updateCreditLimit(Long id, CreditLimit updatedCreditLimit) {
+        // Логика обновления существующего кредитного лимита
+        // Например, поиск по идентификатору, обновление полей и сохранение в базе данных
 
         // Logic for updating the existing credit limit
         // For example, searching by identifier, updating fields and saving to database
@@ -34,13 +39,15 @@ public class CreditLimitService {
         CreditLimit existingCreditLimit = creditLimitRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Credit Limit not found"));
 
-        //     existingCreditLimit.setId(updatedCreditLimit.getLimit());
-        //    existingCreditLimit.setCardNumber(updatedCreditLimit.getCurrency());
+            existingCreditLimit.setId(updatedCreditLimit.getLimit());
+            existingCreditLimit.setCardNumber(updatedCreditLimit.getCurrency());
 
         return creditLimitRepository.save(existingCreditLimit);
     }
 
     public void deleteCreditLimit(Long id) {
+        // Логика удаления кредитного лимита
+        // Например, поиск по идентификатору и удаление из базы данных
 
         // Logic of credit limit deletion
         // For example, search by identifier and deletion from the database
@@ -51,6 +58,9 @@ public class CreditLimitService {
     }
 
     public List<CreditLimit> getAllCreditLimits() {
+        // Логика получения всех кредитных лимитов
+        // Например, получение всех записей из базы данных
+
 
         // Logic of getting all credit limits
         // For example, getting all records from the database
@@ -58,6 +68,8 @@ public class CreditLimitService {
     }
 
     public CreditLimit getCreditLimitById(Long id) {
+        // Логика получения кредитного лимита по идентификатору
+        // Например, поиск по идентификатору в базе данных
 
         // Logic of getting credit limit by identifier
         // For example, search by identifier in the database

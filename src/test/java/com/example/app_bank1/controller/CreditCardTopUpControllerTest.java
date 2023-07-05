@@ -31,31 +31,34 @@ class CreditCardTopUpControllerTest {
 
     @Test
     void getAllTopUps_ReturnsListOfTopUps() {
+        // Упорядочить
         // Arrange
         List<CreditCardTopUp> topUps = new ArrayList<>();
         topUps.add(new CreditCardTopUp());
         topUps.add(new CreditCardTopUp());
         when(creditCardTopUpService.getAllTopUps()).thenReturn(topUps);
 
+        // Действие
         // Act
         List<CreditCardTopUp> result = creditCardTopUpController.getAllTopUps();
-
+        // Проверить
         // Assert
         assertEquals(topUps.size(), result.size());
     }
 
     @Test
     void topUpCreditCard_ReturnsOkResponse() {
+        // Упорядочить
         // Arrange
         CreditCardTopUp creditCardTopUp = new CreditCardTopUp();
 
+        // Действие
         // Act
         ResponseEntity<String> response = creditCardTopUpController.topUpCreditCard(creditCardTopUp);
-
+        // Проверить
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Credit card top-up successful", response.getBody());
         verify(creditCardTopUpService, times(1)).topUpCreditCard(creditCardTopUp);
     }
 }
-

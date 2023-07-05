@@ -23,10 +23,11 @@ public class CreditCardPaymentController {
 
     @GetMapping
     public List<CreditCardPayment> getAllPayments() {
-
+        // Выполните вызов API платежной системы с помощью RestTemplate
          // Make a call to the payment system API using RestTemplate
         ResponseEntity<CreditCardPayment[]> response = restTemplate.getForEntity(remoteApiUrl + "/credit-card-payments", CreditCardPayment[].class);
 
+        // Проверить статус ответа и предпринять соответствующие действия
         // Check response status and take appropriate action
         if (response.getStatusCode().is2xxSuccessful()) {
             CreditCardPayment[] payments = response.getBody();
@@ -38,10 +39,11 @@ public class CreditCardPaymentController {
 
     @PostMapping
     public ResponseEntity<String> makePayment(@RequestBody CreditCardPayment creditCardPayment) {
-
+        // Выполните вызов API платежной системы с помощью RestTemplate
         // Make a call to the payment system API using RestTemplate
         ResponseEntity<String> response = restTemplate.postForEntity(remoteApiUrl + "/credit-card-payments", creditCardPayment, String.class);
 
+        // Проверить статус ответа и предпринять соответствующие действия
         // Check response status and take appropriate action
         if (response.getStatusCode().is2xxSuccessful()) {
             creditCardPaymentService.makePayment(creditCardPayment);

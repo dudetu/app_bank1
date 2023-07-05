@@ -2,6 +2,7 @@ package com.example.app_bank1.service;
 
 import com.example.app_bank1.other_paymens.categories.CreditCardTopUp;
 import com.example.app_bank1.repository.CreditCardTopUpRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,32 +25,35 @@ class CreditCardTopUpServiceTest {
 
     private CreditCardTopUpService topUpService;
 
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         topUpService = new CreditCardTopUpService(topUpRepository, paymentApiService);
     }
 
     @Test
     void getAllTopUps_ShouldReturnAllTopUps() {
+        // Упорядочить
         // Arrange
         CreditCardTopUp topUp1 = new CreditCardTopUp();
         CreditCardTopUp topUp2 = new CreditCardTopUp();
         List<CreditCardTopUp> expectedTopUps = Arrays.asList(topUp1, topUp2);
 
         when(topUpRepository.findAll()).thenReturn(expectedTopUps);
-
+        // Действие
         // Act
         List<CreditCardTopUp> actualTopUps = topUpService.getAllTopUps();
-
+        // Проверить
         // Assert
         assertEquals(expectedTopUps, actualTopUps);
     }
 
     @Test
     void topUpCreditCard_ShouldTopUpCreditCard() {
+        // Упорядочить
         // Arrange
         CreditCardTopUp topUp = new CreditCardTopUp();
-
+        // Действие
         // Act
         topUpService.topUpCreditCard(topUp);
 

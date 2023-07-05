@@ -22,5 +22,8 @@ public class CreditCardTopUp {
     private BigDecimal amount;
 
 
+    public String getUserEmail() {
+        return null;
+    }
 }
 

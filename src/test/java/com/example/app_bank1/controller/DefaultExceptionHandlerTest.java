@@ -12,13 +12,15 @@ class DefaultExceptionHandlerTest {
 
     @Test
     void handle_Exception_ReturnsInternalServerErrorResponse() {
+        // Упорядочить
         // Arrange
         DefaultExceptionHandler exceptionHandler = new DefaultExceptionHandler();
         Exception exception = new Exception();
 
+        // Действие
         // Act
         ResponseEntity result = exceptionHandler.handle(exception);
-
+        // Проверить
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }

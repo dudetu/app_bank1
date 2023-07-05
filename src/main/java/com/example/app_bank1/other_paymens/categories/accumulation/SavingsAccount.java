@@ -26,7 +26,7 @@ public class SavingsAccount {
 
     @Column(name = "balance")
     private double balance;
-
+    // Метод расчета процентов
     // Method for calculating interest
     public void calculateInterest() {
         double interest = balance * (interestRate / 100);

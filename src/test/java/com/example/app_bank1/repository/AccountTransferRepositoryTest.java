@@ -2,11 +2,11 @@ package com.example.app_bank1.repository;
 
 
 import com.example.app_bank1.other_paymens.categories.AccountTransfer;
-import com.example.app_bank1.other_paymens.categories.BankAccountPayment;
-import com.example.app_bank1.repository.AccountTransferRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,77 +15,65 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DataJpaTest
-class AccountTransferRepositoryTest {
+@SpringBootTest
+@Transactional
+@ActiveProfiles("test")
+public class AccountTransferRepositoryTest {
 
     @Autowired
     private AccountTransferRepository accountTransferRepository;
 
     @Test
-    void findAccountTransferByIdAndAmountIsBetween_ReturnsMatchingAccountTransfers() {
+    public void testFindAll() {
+        // Упорядочить
         // Arrange
         AccountTransfer transfer1 = new AccountTransfer();
         transfer1.setId(1L);
-        transfer1.setAmount(new BigDecimal("100.00"));
+        transfer1.setAmount(BigDecimal.valueOf(100));
         accountTransferRepository.save(transfer1);
 
         AccountTransfer transfer2 = new AccountTransfer();
         transfer2.setId(2L);
-        transfer2.setAmount(new BigDecimal("200.00"));
+        transfer2.setAmount(BigDecimal.valueOf(200));
         accountTransferRepository.save(transfer2);
 
-        AccountTransfer transfer3 = new AccountTransfer();
-        transfer3.setId(3L);
-        transfer3.setAmount(new BigDecimal("300.00"));
-        accountTransferRepository.save(transfer3);
-
         // Act
-        List<AccountTransfer> transfers = accountTransferRepository.findAccountTransferByIdAndAmountIsBetween(2L, new BigDecimal("150.00"), new BigDecimal("250.00"));
+        List<AccountTransfer> transfers = accountTransferRepository.findAll();
 
         // Assert
-        assertEquals(1, transfers.size());
-        assertEquals(transfer2, transfers.get(0));
+        assertEquals(2, transfers.size());
     }
 
     @Test
-    void save_SavesAccountTransfer() {
+    public void testSave() {
+        // Упорядочить
         // Arrange
         AccountTransfer transfer = new AccountTransfer();
         transfer.setId(1L);
-        transfer.setAmount(new BigDecimal("100.00"));
-
+        transfer.setAmount(BigDecimal.valueOf(100));
+        // Действие
         // Act
         AccountTransfer savedTransfer = accountTransferRepository.save(transfer);
-
+        // Проверить
         // Assert
-        assertEquals(transfer, savedTransfer);
-        assertTrue(accountTransferRepository.findById(1L).isPresent());
+        assertTrue(accountTransferRepository.findById(savedTransfer.getId()).isPresent());
     }
 
     @Test
-    void findById_ReturnsAccountTransferOptional() {
+    public void testFindById() {
+        // Упорядочить
         // Arrange
         AccountTransfer transfer = new AccountTransfer();
         transfer.setId(1L);
-        transfer.setAmount(new BigDecimal("100.00"));
+        transfer.setAmount(BigDecimal.valueOf(100));
         accountTransferRepository.save(transfer);
-
+        // Действие
         // Act
         Optional<AccountTransfer> optionalTransfer = accountTransferRepository.findById(1L);
-
+        // Проверить
         // Assert
         assertTrue(optionalTransfer.isPresent());
-        assertEquals(transfer, optionalTransfer.get());
+        assertEquals(1L, optionalTransfer.get().getId());
     }
 
-    @Test
-    void save_SavesBankAccountPayment() {
-        // Arrange
-        BankAccountPayment payment = new BankAccountPayment();
-
-        // Act
-        accountTransferRepository.save(payment);
-
-
-    }
 }

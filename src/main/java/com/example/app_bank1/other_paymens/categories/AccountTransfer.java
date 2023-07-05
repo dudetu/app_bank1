@@ -11,11 +11,9 @@ import java.math.BigDecimal;
 public class AccountTransfer {
 
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
 
     @Column(name = "source_account")
     private String sourceAccount;
@@ -29,6 +27,9 @@ public class AccountTransfer {
     @Column(name = "amount")
     private BigDecimal amount;
 
+    @Column(name = "user_id")
+    private Long userId;
 
 }
+
 

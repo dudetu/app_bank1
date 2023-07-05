@@ -13,6 +13,7 @@ import java.util.List;
 public class AccountTransferService {
 
     private final AccountTransferRepository accountTransferRepository;
+    public Object receive;
 
     public AccountTransferService(AccountTransferRepository accountTransferRepository) {
         this.accountTransferRepository = accountTransferRepository;
@@ -24,26 +25,25 @@ public class AccountTransferService {
 
     public void makeTransfer(AccountTransfer accountTransfer) {
 
-        // The logic of performing a transfer to the account
-        // For example, calling the API of the payment system to make a transfer
-        // And saving information about the transfer in the database
+        // Логика выполнения перевода на счет
+        // Например, вызов API платежной системы для выполнения перевода
+        // И сохранение информации о переводе в базе данных
         accountTransferRepository.save(accountTransfer);
     }
-
 
     @Autowired
     private PaymentSystemService paymentSystemService;
 
     public void executeTransfer(String sourceAccount, String destinationAccount, BigDecimal amount) throws TransferException {
-
-        // Calling the API of the payment system to perform a transfer
+        // Call the API of the payment system to perform a transfer
+        // Вызов API платежной системы для выполнения перевода
 
         boolean transferSuccessful = paymentSystemService.transferFunds(sourceAccount, destinationAccount, amount);
 
         if (transferSuccessful) {
 
-            //  Saving transfer information in the database
-
+            // Сохранение информации о переводе в базе данных
+            // Saving translation information in the database
             AccountTransfer transfer = new AccountTransfer();
             transfer.setSourceAccount(sourceAccount);
             transfer.setDestinationAccount(destinationAccount);
@@ -51,16 +51,18 @@ public class AccountTransferService {
             accountTransferRepository.save(transfer);
         } else {
 
-            //   Processing a translation error
-            throw new TransferException("Failed to execute transfer. Please try again later.");
+            // Обработка ошибки перевода
+            // Processing a translation error
+            throw new TransferException("Не удалось выполнить перевод. Пожалуйста, попробуйте еще раз позже.");
         }
     }
 
     public void receiveTransfer(String sourceAccount, String destinationAccount, BigDecimal amount) {
 
-
-        // Logic for receiving a transfer from another bank account
-        // Saving information about the translation to the database
+        // Логика приема перевода со счета другого банка
+        // Сохранение информации о переводе в базе данных
+        // Logic of acceptance of transfer from another bank account
+        // Saving information about the transfer in the database
 
         AccountTransfer transfer = new AccountTransfer();
         transfer.setSourceAccount(sourceAccount);
@@ -69,6 +71,9 @@ public class AccountTransferService {
         accountTransferRepository.save(transfer);
     }
 
+
+    public void setPaymentSystemService(PaymentSystemService paymentSystemService) {
+    }
 }
 
 

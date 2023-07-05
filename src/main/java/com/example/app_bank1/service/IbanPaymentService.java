@@ -1,10 +1,10 @@
 package com.example.app_bank1.service;
 
-
 import com.example.app_bank1.other_paymens.categories.IbanPayment;
 import org.springframework.stereotype.Service;
 import com.example.app_bank1.repository.IbanPaymentRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,23 +20,42 @@ public class IbanPaymentService {
         return ibanPaymentRepository.findAll();
     }
 
-
     public void processPayment(IbanPayment payment) {
+        // Реализация логики обработки платежа с использованием API
+        // Implementation of payment processing logic using API
 
+        // Предполагается, что существует API платежного шлюза, который обрабатывает платежи
+        // It is assumed that there is a payment gateway API, which processes payments
+        PaymentGateway paymentGateway = new PaymentGateway();
+        boolean paymentSuccess = paymentGateway.processPayment(payment.getIban(), payment.getAmount());
 
-        // Implement the logic for processing the payment using the API
-        // Save the payment information to the database
-        ibanPaymentRepository.save(payment);
+        if (paymentSuccess) {
+            // Сохранение информации о платеже в базу данных
+            // Saving information about the payment in the database
+            ibanPaymentRepository.save(payment);
+            System.out.println("Платеж успешно обработан.");
+        } else {
+            System.out.println("Ошибка при обработке платежа.");
+        }
     }
 
     public IbanPayment getPaymentById(Long paymentId) {
-
-
-        // Retrieve the payment from the database by its ID
+        // Получение платежа из базы данных по его идентификатору
+        // Retrieve a payment from the database by its identifier
         return ibanPaymentRepository.findById(paymentId)
                 .orElseThrow();
     }
 
+    private class PaymentGateway {
+        public boolean processPayment(String iban, BigDecimal amount) {
+            // Реализация логики обработки платежа с использованием API платежного шлюза
+            // Вернуть true, если платеж успешен, иначе вернуть false
 
+            // Implementation of payment processing logic using payment gateway API
+            // Return true if payment is successful, otherwise return false
+            return true;
+        }
+    }
 }
+
 

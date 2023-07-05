@@ -23,15 +23,17 @@ public class UtilityBillController {
 
     @GetMapping
     public List<UtilityBill> getAllBills() {
-
+        // Вызов удаленного API для получения списка счетов
         // Calling a remote API to get a list of accounts
         ResponseEntity<List> response = restTemplate.getForEntity(remoteApiUrl + "/utility-bills", List.class);
+        // Обработка ответа от удаленного API
         // Handling the response from the remote API
 
         if (response.getStatusCode().is2xxSuccessful()) {
             List<UtilityBill> bills = response.getBody();
             return bills;
         }
+        // Ошибка при получении списка счетов через удаленный API
         // Error when getting list of accounts via remote API
 
         throw new RuntimeException("Failed to retrieve utility bills from remote API");
@@ -39,15 +41,17 @@ public class UtilityBillController {
 
     @PostMapping
     public ResponseEntity<String> createBill(@RequestBody UtilityBill utilityBill) {
+        // Вызов удаленного API для создания учетной записи
         // Calling a remote API to create an account
 
         ResponseEntity<String> response = restTemplate.postForEntity(remoteApiUrl + "/utility-bills", utilityBill, String.class);
+        // Обработка ответа от удаленного API
         // Handling the response from the remote API
 
         if (response.getStatusCode().is2xxSuccessful()) {
             return ResponseEntity.ok("Utility bill created successfully");
         }
-
+        // Ошибка при создании счета-фактуры через удаленный API
         // Error when creating invoice via remote API
 
         throw new RuntimeException("Failed to create utility bill through remote API");

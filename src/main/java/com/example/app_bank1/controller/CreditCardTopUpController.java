@@ -14,11 +14,10 @@ public class CreditCardTopUpController {
 
     private final CreditCardTopUpService creditCardTopUpService;
     private final RestTemplate restTemplate;
-    private final String remoteApiUrl = "https://lunar-star-116208.postman.com/api";
 
     public CreditCardTopUpController(CreditCardTopUpService creditCardTopUpService, RestTemplate restTemplate) {
         this.creditCardTopUpService = creditCardTopUpService;
-        this.restTemplate = restTemplate;
+        this.restTemplate = restTemplate; //должны использовать RestTemplate или другой подходящий инструмент для этого вызова API.
     }
 
     @GetMapping
@@ -28,19 +27,26 @@ public class CreditCardTopUpController {
 
     @PostMapping
     public ResponseEntity<String> topUpCreditCard(@RequestBody CreditCardTopUp creditCardTopUp) {
-
+        // Вызов удаленного API для осуществления платежа с использованием предоставленных данных
         // Calling a remote API to make a payment using the provided data
-        ResponseEntity<String> response = restTemplate.postForEntity(remoteApiUrl + "/credit-card-top-ups", creditCardTopUp, String.class);
 
-        // Handling the response from the remote API
-        if (response.getStatusCode().is2xxSuccessful()) {
+        // Здесь можно использовать restTemplate для вызова удаленного API
+        // Here you can use restTemplate to call the remote API
 
-            // Payment completed successfully
-            return ResponseEntity.ok("Credit card top-up successful");
-        } else {
+        // Ваш код для вызова удаленного API
+        // Your code to call the remote API
 
-            // Handling an error when making a payment
-            return ResponseEntity.status(response.getStatusCode()).body("Credit card top-up failed");
-        }
+        // Пример кода, как можно обновить сервис пополнения кредитной карты
+        // Example code on how you can update the credit card top-up service
+        creditCardTopUpService.topUpCreditCard(creditCardTopUp);
+
+        // Возвращение ответа в зависимости от результата пополнения кредитной карты
+        // Returning a response based on the result of the credit card top-up
+
+        // Пример ответа в случае успешного пополнения
+        // Example response in case of successful top-up
+        return ResponseEntity.ok("Credit card top-up successful");
+
+
     }
 }

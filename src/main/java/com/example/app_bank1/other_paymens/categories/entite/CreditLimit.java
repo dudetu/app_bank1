@@ -25,8 +25,13 @@ public class CreditLimit {
     private BigDecimal creditLimit;
 
 
+    public Long getLimit() {
+        return null;
+    }
 
-
+    public String getCurrency() {
+        return null;
+    }
 }
 
 

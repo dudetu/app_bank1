@@ -26,6 +26,20 @@ public class FinePayment {
     private BigDecimal amount;
 
 
+    public boolean isSuccessful() {
+        return false;
+    }
+
+    public String getUserEmail() {
+        return null;
+    }
+
+    public void setStatus(String paid) {
+    }
+
+    public String getStatus() {
+        return null;
+    }
 }
 
 

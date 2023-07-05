@@ -36,6 +36,7 @@ public class PaymentRequest {
         String apiUrl = "https://api.payment-system.com/payments";
 
         // Инициализируйте и заполните paymentRequest перед использованием
+        // Initialize and populate the paymentRequest before using it
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setAmount(bankAccountPayment.getAmount());
         paymentRequest.setUserId((Long) bankAccountPayment.getUserId());
@@ -46,8 +47,10 @@ public class PaymentRequest {
             RestTemplate restTemplate = new RestTemplate();
             PaymentApiResponse response = restTemplate.postForObject(apiUrl, paymentRequest, PaymentApiResponse.class);
             // Обработайте ответ от API платежной системы, если необходимо
+            // Process the response from the payment system API, if necessary
         } catch (Exception e) {
             // Обработайте исключение при вызове API платежной системы
+            // Handle exception on payment system API call
         }
     }
 }
