@@ -8,7 +8,7 @@ public enum AccountStatus {
 
       CLOSED,
 
-      REMOVED ,
+      REMOVED,
 
      INACTIVE
 
