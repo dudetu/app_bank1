@@ -1,8 +1,10 @@
 package com.example.app_bank1.service;
 
-import com.example.app_bank1.other_paymens.categories.AccountTransfer;
+import com.example.app_bank1.other_paymens.categories.entity.AccountTransfer;
 import com.example.app_bank1.exception.TransferException;
-import com.example.app_bank1.repository.AccountTransferRepository;
+import com.example.app_bank1.other_paymens.categories.repository.AccountTransferRepository;
+import com.example.app_bank1.other_paymens.categories.service.AccountTransferService;
+import com.example.app_bank1.other_paymens.categories.service.PaymentSystemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

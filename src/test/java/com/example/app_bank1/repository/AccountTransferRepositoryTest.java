@@ -1,7 +1,8 @@
 package com.example.app_bank1.repository;
 
 
-import com.example.app_bank1.other_paymens.categories.AccountTransfer;
+import com.example.app_bank1.other_paymens.categories.entity.AccountTransfer;
+import com.example.app_bank1.other_paymens.categories.repository.AccountTransferRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

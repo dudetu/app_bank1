@@ -1,7 +1,8 @@
 package com.example.app_bank1.service;
 
-import com.example.app_bank1.other_paymens.categories.CreditCardPayment;
-import com.example.app_bank1.repository.CreditCardPaymentRepository;
+import com.example.app_bank1.other_paymens.categories.entity.payments.CreditCardPayment;
+import com.example.app_bank1.other_paymens.categories.repository.CreditCardPaymentRepository;
+import com.example.app_bank1.other_paymens.categories.service.CreditCardPaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

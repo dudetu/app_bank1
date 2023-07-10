@@ -16,13 +16,13 @@ public class AppBank1Application {
         SpringApplication.run(AppBank1Application.class, args);
     }
 
-
-
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-        }
 
-
-
+    @Bean
+    public String remoteApiUrl() {
+        return "https://api.example.com"; // Замените на фактический URL API
+    }
+}

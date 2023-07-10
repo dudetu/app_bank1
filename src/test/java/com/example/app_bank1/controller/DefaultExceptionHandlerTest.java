@@ -1,7 +1,6 @@
 package com.example.app_bank1.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.example.app_bank1.other_paymens.categories.controller.DefaultExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

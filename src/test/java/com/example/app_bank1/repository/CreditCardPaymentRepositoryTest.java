@@ -2,7 +2,8 @@ package com.example.app_bank1.repository;
 
 
 
-import com.example.app_bank1.other_paymens.categories.CreditCardPayment;
+import com.example.app_bank1.other_paymens.categories.entity.payments.CreditCardPayment;
+import com.example.app_bank1.other_paymens.categories.repository.CreditCardPaymentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

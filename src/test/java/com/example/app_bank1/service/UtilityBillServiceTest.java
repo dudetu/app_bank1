@@ -1,7 +1,8 @@
 package com.example.app_bank1.service;
 
-import com.example.app_bank1.other_paymens.categories.UtilityBill;
-import com.example.app_bank1.repository.UtilityBillRepository;
+import com.example.app_bank1.other_paymens.categories.entity.UtilityBill;
+import com.example.app_bank1.other_paymens.categories.repository.UtilityBillRepository;
+import com.example.app_bank1.other_paymens.categories.service.UtilityBillService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

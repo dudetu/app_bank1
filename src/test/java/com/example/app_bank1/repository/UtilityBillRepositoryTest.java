@@ -1,7 +1,7 @@
 package com.example.app_bank1.repository;
 
-import com.example.app_bank1.other_paymens.categories.UtilityBill;
-import com.example.app_bank1.repository.UtilityBillRepository;
+import com.example.app_bank1.other_paymens.categories.entity.UtilityBill;
+import com.example.app_bank1.other_paymens.categories.repository.UtilityBillRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

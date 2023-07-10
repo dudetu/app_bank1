@@ -1,9 +1,9 @@
 package com.example.app_bank1.controller;
 
-import com.example.app_bank1.other_paymens.categories.AccountTransfer;
-import com.example.app_bank1.service.AccountTransferService;
+import com.example.app_bank1.other_paymens.categories.controller.AccountTransferController;
+import com.example.app_bank1.other_paymens.categories.entity.AccountTransfer;
+import com.example.app_bank1.other_paymens.categories.service.AccountTransferService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

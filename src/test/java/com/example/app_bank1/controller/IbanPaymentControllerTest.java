@@ -1,8 +1,9 @@
 package com.example.app_bank1.controller;
 
 
-import com.example.app_bank1.other_paymens.categories.IbanPayment;
-import com.example.app_bank1.service.IbanPaymentService;
+import com.example.app_bank1.other_paymens.categories.controller.IbanPaymentController;
+import com.example.app_bank1.other_paymens.categories.entity.payments.IbanPayment;
+import com.example.app_bank1.other_paymens.categories.service.IbanPaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

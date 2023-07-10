@@ -1,8 +1,9 @@
 package com.example.app_bank1.controller;
 
-import com.example.app_bank1.other_paymens.categories.UtilityBill;
-import com.example.app_bank1.service.UtilityBillService;
-import com.example.app_bank1.repository.UtilityBillRepository;
+import com.example.app_bank1.other_paymens.categories.controller.UtilityBillController;
+import com.example.app_bank1.other_paymens.categories.entity.UtilityBill;
+import com.example.app_bank1.other_paymens.categories.service.UtilityBillService;
+import com.example.app_bank1.other_paymens.categories.repository.UtilityBillRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -28,7 +29,7 @@ class UtilityBillControllerTest {
     void setUp() {
         MockitoAnnotations.initMocks(this); // Инициализируем аннотации Mockito
         utilityBillService = new UtilityBillService(utilityBillRepository); // Создаем сервис с заглушкой репозитория
-        utilityBillController = new UtilityBillController(utilityBillService); // Создаем контроллер
+        utilityBillController = new UtilityBillControllerBuilder().setUtilityBillService(utilityBillService).setRemoteApiUrl(remoteApiUrl).createUtilityBillController(); // Создаем контроллер
     }
 
     @Test

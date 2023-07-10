@@ -1,9 +1,9 @@
 package com.example.app_bank1.service;
 
-import com.example.app_bank1.account.PaymentApiResponse;
-import com.example.app_bank1.other_paymens.categories.BankAccountPayment;
-import com.example.app_bank1.repository.BankAccountPaymentRepository;
-import com.example.app_bank1.service.BankAccountPaymentService;
+import com.example.app_bank1.other_paymens.categories.entity.payments.PaymentApiResponse;
+import com.example.app_bank1.other_paymens.categories.entity.payments.BankAccountPayment;
+import com.example.app_bank1.other_paymens.categories.repository.BankAccountPaymentRepository;
+import com.example.app_bank1.other_paymens.categories.service.BankAccountPaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

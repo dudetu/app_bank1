@@ -4,14 +4,17 @@ package com.example.app_bank1.other_paymens.categories.accumulation;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
+/**
+ * This class represents a savings account with basic account information and balance.
+ * It provides methods for calculating interest on the account balance.
+ */
 @Data
 @Entity
 @Table(name = "SavingsAccount")
 public class SavingsAccount {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Long id;
 
@@ -26,11 +29,14 @@ public class SavingsAccount {
 
     @Column(name = "balance")
     private double balance;
-    // Метод расчета процентов
-    // Method for calculating interest
+
+    /**
+     * Calculates the interest on the account balance based on the interest rate.
+     * The interest is added to the account balance.
+     */
     public void calculateInterest() {
         double interest = balance * (interestRate / 100);
         balance += interest;
     }
-
 }
+

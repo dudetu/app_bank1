@@ -1,7 +1,8 @@
 package com.example.app_bank1.controller;
 
-import com.example.app_bank1.other_paymens.categories.FinePayment;
-import com.example.app_bank1.service.FinePaymentService;
+import com.example.app_bank1.other_paymens.categories.controller.FinePaymentController;
+import com.example.app_bank1.other_paymens.categories.entity.payments.FinePayment;
+import com.example.app_bank1.other_paymens.categories.service.FinePaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
-import com.example.app_bank1.service.SavingsAccountService;
+import com.example.app_bank1.other_paymens.categories.controller.SavingsAccountController;
+import com.example.app_bank1.other_paymens.categories.service.SavingsAccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
