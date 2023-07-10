@@ -21,11 +21,11 @@ class BankAccountPaymentRepositoryTest {
         // Упорядочить
         // Arrange
         BankAccountPayment payment1 = new BankAccountPayment();
-        payment1.setBankAccountNumber("1234567890");
+        payment1.setBankAccountNumber(Long.valueOf("1234567890"));
         bankAccountPaymentRepository.save(payment1);
 
         BankAccountPayment payment2 = new BankAccountPayment();
-        payment2.setBankAccountNumber("0987654321");
+        payment2.setBankAccountNumber(Long.valueOf("0987654321"));
         bankAccountPaymentRepository.save(payment2);
         // Действие
         // Act

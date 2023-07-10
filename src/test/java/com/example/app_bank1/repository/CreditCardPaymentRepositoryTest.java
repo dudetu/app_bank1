@@ -25,11 +25,11 @@ class CreditCardPaymentRepositoryTest {
         // Упорядочить
         // Arrange
         CreditCardPayment payment1 = new CreditCardPayment();
-        payment1.setCreditCardNumber("1234567890123456");
+        payment1.setCreditCardNumber(Boolean.valueOf("1234567890123456"));
         creditCardPaymentRepository.save(payment1);
 
         CreditCardPayment payment2 = new CreditCardPayment();
-        payment2.setCreditCardNumber("0987654321098765");
+        payment2.setCreditCardNumber(Boolean.valueOf("0987654321098765"));
         creditCardPaymentRepository.save(payment2);
         // Действие
         // Act

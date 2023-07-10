@@ -8,9 +8,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @DataJpaTest
 class UtilityBillRepositoryTest {
@@ -27,11 +30,11 @@ class UtilityBillRepositoryTest {
         utilityBillRepository.save(bill);
         // Действие
         // Act
-        UtilityBill result = utilityBillRepository.findByBillNumber("123456789");
+        Optional<UtilityBill> result = utilityBillRepository.findByBillNumber("123456789");
         // Проверить
         // Assert
-        assertNotNull(result);
-        assertEquals(bill, result);
+        assertTrue(result.isPresent());
+        assertEquals(bill, result.get());
     }
 
     @Test

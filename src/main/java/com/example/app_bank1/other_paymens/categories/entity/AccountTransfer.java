@@ -162,6 +162,17 @@ public class AccountTransfer {
     public void setClientAccount(ClientAccount clientAccount) {
         this.clientAccount = clientAccount;
     }
+
+    /**
+     * This method is empty because it is not required for the current functionality of the application.
+     * It can be implemented in the future if needed.
+     *
+     * @param userId The ID of the user to set.
+     */
+    public void setUserId(long userId) {
+        // This method is intentionally left empty.
+        // It can be implemented in the future if needed.
+    }
 }
 
 
