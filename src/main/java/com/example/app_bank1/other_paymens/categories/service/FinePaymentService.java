@@ -1,20 +1,21 @@
 package com.example.app_bank1.other_paymens.categories.service;
 
 import com.example.app_bank1.other_paymens.categories.entity.payments.FinePayment;
-import org.springframework.stereotype.Service;
 import com.example.app_bank1.other_paymens.categories.repository.FinePaymentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- *
- *
- */
 @Service
 public class FinePaymentService {
 
     private final FinePaymentRepository finePaymentRepository;
+    private final Logger logger = LoggerFactory.getLogger(FinePaymentService.class);
 
     public FinePaymentService(FinePaymentRepository finePaymentRepository) {
         this.finePaymentRepository = finePaymentRepository;
@@ -22,51 +23,39 @@ public class FinePaymentService {
 
     /**
      * Получить все платежи за штрафы.
-     * Get all fine payments.
      *
      * @return список всех платежей за штрафы
-     *         a list of all fine payments
      */
+    @Cacheable("finePayments")
     public List<FinePayment> getAllPayments() {
         return finePaymentRepository.findAll();
     }
 
     /**
      * Осуществить платеж за штраф.
-     * Make a payment for a fine.
      *
      * @param finePayment информация о платеже за штраф
-     *                    the fine payment information
      */
+    @CacheEvict(value = "finePayments", allEntries = true)
     public void makeFinePayment(FinePayment finePayment) {
-        // Call the payment system API to process the payment
         boolean paymentSuccess = makePayment(finePayment.getAmount());
 
         if (paymentSuccess) {
-            // Save the payment information to the database
             finePaymentRepository.save(finePayment);
-            System.out.println("Оплата штрафа выполнена успешно.");
-            // Additional logic
-            // Perform some actions after successful payment
+            logger.info("Оплата штрафа выполнена успешно.");
             sendPaymentConfirmation(finePayment);
             updatePaymentStatus(finePayment);
         } else {
-            System.out.println("Не удалось выполнить оплату штрафа.");
-
-            // Additional logic
-            // Perform some actions after failed payment
+            logger.error("Не удалось выполнить оплату штрафа.");
             notifyPaymentFailure(finePayment);
         }
     }
 
     /**
      * Выполнить платеж.
-     * Make a payment.
      *
      * @param amount сумма платежа
-     *               the payment amount
      * @return true, если платеж выполнен успешно, иначе false
-     *         true if the payment was successful, otherwise false
      */
     public boolean makePayment(BigDecimal amount) {
         // Implementation of payment processing logic
@@ -74,53 +63,39 @@ public class FinePaymentService {
         return false;
     }
 
-
-
     /**
      * Отправить подтверждение платежа пользователю.
-     * Send payment confirmation to the user.
      *
      * @param finePayment информация о платеже за штраф
-     *                    the fine payment information
      */
     private void sendPaymentConfirmation(FinePayment finePayment) {
         // Logic for sending payment confirmation to the user
         // Replace with your actual implementation
-        System.out.println("Отправлено подтверждение оплаты пользователю: " + finePayment.getUserEmail());
+        logger.info("Отправлено подтверждение оплаты пользователю: " + finePayment.getUserEmail());
     }
 
     /**
      * Обновить статус платежа.
-     * Update the payment status.
      *
      * @param finePayment информация о платеже за штраф
-     *                    the fine payment information
      */
     private void updatePaymentStatus(FinePayment finePayment) {
         // Logic for updating the payment status or performing related operations
         // Replace with your actual implementation
         finePayment.setStatus("PAID");
         finePaymentRepository.save(finePayment);
-        System.out.println("Обновлен статус платежа: " + finePayment.getStatus());
+        logger.info("Обновлен статус платежа: " + finePayment.getStatus());
     }
 
     /**
      * Уведомить пользователя о неудаче платежа.
-     * Notify the user of payment failure.
      *
      * @param finePayment информация о платеже за штраф
-     *                    the fine payment information
      */
     private void notifyPaymentFailure(FinePayment finePayment) {
         // Logic for notifying the user or performing actions after payment failure
         // Replace with your actual implementation
-        System.out.println("Отправлено уведомление о неудаче платежа пользователю: " + finePayment.getUserEmail());
+        logger.info("Отправлено уведомление о неудаче платежа пользователю: " + finePayment.getUserEmail());
     }
 
-
 }
-
-
-
-
-

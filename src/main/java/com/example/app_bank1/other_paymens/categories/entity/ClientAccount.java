@@ -8,9 +8,11 @@ import lombok.Data;
 
 import java.util.List;
 
+
 /**
  * Represents a client account.
  */
+
 @Data
 @Entity
 @Table(name = "client_account")
@@ -22,6 +24,18 @@ public class ClientAccount {
 
     @Column(name = "owner_name")
     private String ownerName;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+
+
 
     @OneToMany(mappedBy = "clientAccount", cascade = CascadeType.ALL)
     private List<BankAccounts> bankAccounts;
@@ -227,6 +241,5 @@ public class ClientAccount {
         this.accountTransfers = accountTransfers;
     }
 }
-
 
 

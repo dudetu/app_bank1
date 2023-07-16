@@ -8,36 +8,34 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+
+
 /**
  *
  *
  */
 @Service
+@RequiredArgsConstructor
 public class IbanPaymentService {
 
     private final IbanPaymentRepository ibanPaymentRepository;
 
-    public IbanPaymentService(IbanPaymentRepository ibanPaymentRepository) {
-        this.ibanPaymentRepository = ibanPaymentRepository;
-    }
-
     /**
      * Получить все платежи по IBAN.
-     * Get all payments by IBAN.
      *
      * @return список всех платежей по IBAN
-     *         a list of all payments by IBAN
      */
+    @Cacheable("ibanPayments")
     public List<IbanPayment> getAllPayments() {
         return ibanPaymentRepository.findAll();
     }
 
     /**
      * Обработать платеж по IBAN.
-     * Process a payment by IBAN.
      *
      * @param payment информация о платеже по IBAN
-     *                the payment information by IBAN
      */
     public void processPayment(IbanPayment payment) {
         // Implementation of payment processing logic using API
@@ -56,15 +54,12 @@ public class IbanPaymentService {
 
     /**
      * Получить платеж по его идентификатору.
-     * Get a payment by its identifier.
      *
      * @param paymentId идентификатор платежа
-     *                  the payment identifier
      * @return платеж с указанным идентификатором
-     *         the payment with the specified identifier
      * @throws NoSuchElementException если платеж не найден
-     *                                if the payment is not found
      */
+    @Cacheable(value = "ibanPayments", key = "#paymentId")
     public IbanPayment getPaymentById(Long paymentId) throws NoSuchElementException {
         // Retrieve a payment from the database by its identifier
         return ibanPaymentRepository.findById(paymentId)
@@ -80,5 +75,3 @@ public class IbanPaymentService {
     }
 
 }
-
-

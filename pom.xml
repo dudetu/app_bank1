@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.daniil1380</groupId>
-    <artifactId>tinder</artifactId>
+    <artifactId>app_dank1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tinder</name>
-    <description>tinder</description>
+    <name>app_dank1</name>
+    <description>app_dank1</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -44,16 +44,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
 
     </dependencies>
@@ -68,7 +58,6 @@
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-
                         </exclude>
                     </excludes>
                 </configuration>

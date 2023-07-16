@@ -1,18 +1,18 @@
 package com.example.app_bank1.other_paymens.categories.service;
-
-import com.example.app_bank1.other_paymens.categories.entity.payments.PaymentApiResponse;
 import com.example.app_bank1.other_paymens.categories.entity.payments.BankAccountPayment;
+import com.example.app_bank1.other_paymens.categories.entity.payments.PaymentApiResponse;
 import com.example.app_bank1.other_paymens.categories.repository.BankAccountPaymentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 /**
- *
- *
+ * Сервисный класс для управления платежами по банковским счетам.
  */
 @Service
 public class BankAccountPaymentService {
@@ -28,42 +28,47 @@ public class BankAccountPaymentService {
 
     /**
      * Получить все платежи по банковским счетам.
-     * Get all payments made through bank accounts.
      *
      * @return список платежей по банковским счетам
-     * a list of payments made through bank accounts
      */
+    @Cacheable("bankAccountPayments")
     public List<BankAccountPayment> getAllPayments() {
         return bankAccountPaymentRepository.findAll();
     }
 
     /**
      * Выполнить платеж по банковскому счету.
-     * Execute a payment through a bank account.
      * Сохранить информацию о платеже в базе данных и отправить запрос к API платежной системы.
-     * Save the payment information in the database and send a request to the payment system API.
      *
      * @param bankAccountPayment информация о платеже
-     *                           the payment information
      */
+    @CacheEvict(value = "bankAccountPayments", allEntries = true)
     public void makePayment(BankAccountPayment bankAccountPayment) {
         bankAccountPaymentRepository.save(bankAccountPayment);
 
         String apiUrl = "https://api.payment-system.com/payments";
 
         try {
-            Object paymentRequest = null; // Здесь должна быть инициализация и заполнение объекта paymentRequest
+            Object paymentRequest = createPaymentRequest(bankAccountPayment); // Инициализация и заполнение объекта paymentRequest
             PaymentApiResponse response = restTemplate.postForObject(apiUrl, paymentRequest, PaymentApiResponse.class);
             // При необходимости обработайте ответ от API платежной системы
             // Process the response from the payment system API if needed
 
         } catch (Exception e) {
             // Обработка исключения при вызове API платежной системы
-            // Exception handling when API of the payment system is called
             logger.error("Произошла ошибка при выполнении платежа через API платежной системы: " + e.getMessage());
         }
     }
+
+    private Object createPaymentRequest(BankAccountPayment bankAccountPayment) {
+        // Логика создания объекта paymentRequest на основе информации о платеже
+        // ...
+
+        return null; // Возвращаем созданный объект paymentRequest
+    }
 }
-    
+
+
+
 
 

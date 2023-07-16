@@ -8,11 +8,14 @@ import com.example.app_bank1.other_paymens.categories.repository.AccountTransfer
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  *
  *
  */
+
 @Service
 public class AccountTransferService {
 
@@ -30,6 +33,7 @@ public class AccountTransferService {
      *
      * @return the list of transfers between accounts
      */
+    @Cacheable("transfers")
     public List<AccountTransfer> getAllTransfers() {
         return accountTransferRepository.findAll();
     }
@@ -56,12 +60,10 @@ public class AccountTransferService {
      * @throws TransferException if an error occurs during the transfer
      */
     public void executeTransfer(String sourceAccount, String destinationAccount, BigDecimal amount) throws TransferException {
-        // Вызовите API платежной системы для выполнения перевода
         // Call the payment system API to execute the transfer
         boolean transferSuccessful = paymentSystemService.transferFunds(sourceAccount, destinationAccount, amount);
 
         if (transferSuccessful) {
-            // Сохранить информацию о передаче в базе данных
             // Save the transfer information in the database
             AccountTransfer transfer = new AccountTransfer();
             transfer.setSourceAccount(sourceAccount);
@@ -69,8 +71,6 @@ public class AccountTransferService {
             transfer.setAmount(amount);
             accountTransferRepository.save(transfer);
         } else {
-            // Обработка ошибки передачи
-            // Handle transfer error
             throw new TransferException("Failed to execute the transfer. Please try again later.");
         }
     }
@@ -83,7 +83,6 @@ public class AccountTransferService {
      * @param amount             the transfer amount
      */
     public void receiveTransfer(String sourceAccount, String destinationAccount, BigDecimal amount) {
-
         AccountTransfer transfer = new AccountTransfer();
         transfer.setSourceAccount(sourceAccount);
         transfer.setDestinationAccount(Long.valueOf(destinationAccount));
@@ -91,7 +90,22 @@ public class AccountTransferService {
         accountTransferRepository.save(transfer);
     }
 
+    /**
+     * Set the payment system service.
+     *
+     * @param paymentSystemService the payment system service to set
+     */
     public void setPaymentSystemService(PaymentSystemService paymentSystemService) {
-        // TODO document why this method is empty
+        this.paymentSystemService = paymentSystemService;
+    }
+
+    /**
+     * Clear the cache for transfers.
+     */
+    @CacheEvict(value = "transfers", allEntries = true)
+    public void clearTransfersCache() {
+        // This method clears the cache for transfers.
+        // It can be called after making a new transfer or receiving a transfer.
+        // This ensures that the cache is updated with the latest transfers.
     }
 }

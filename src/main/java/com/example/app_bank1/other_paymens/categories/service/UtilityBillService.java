@@ -31,6 +31,12 @@ public class UtilityBillService {
     public List<UtilityBill> getAllBills() {
         return utilityBillRepository.findAll();
     }
+
+    public void createBill(UtilityBill bill) {
+    }
+
+    public void setUtilityBills(List<UtilityBill> utilityBills) {
+    }
 }
 
 

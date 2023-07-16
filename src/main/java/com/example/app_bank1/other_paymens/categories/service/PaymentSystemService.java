@@ -1,9 +1,9 @@
 package com.example.app_bank1.other_paymens.categories.service;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-
 /**
  *
  *
@@ -13,9 +13,9 @@ public class PaymentSystemService {
     /**
      * Transfer funds from the source account to the destination account.
      *
-     * @param sourceAccount the source account number
+     * @param sourceAccount      the source account number
      * @param destinationAccount the destination account number
-     * @param amount the amount to transfer
+     * @param amount             the amount to transfer
      * @return true if the transfer is successful, false if there is an error
      */
     public boolean transferFunds(String sourceAccount, String destinationAccount, BigDecimal amount) {
@@ -38,6 +38,8 @@ public class PaymentSystemService {
         return false;
     }
 }
+
+
 
 
 
