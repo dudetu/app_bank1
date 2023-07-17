@@ -2,6 +2,7 @@
 package com.example.app_bank1.other_paymens.categories.entity;
 
 import com.example.app_bank1.other_paymens.categories.entity.payments.BankAccountPayment;
+import com.example.app_bank1.other_paymens.categories.entity.Transactions.BankAccount;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,6 +22,11 @@ public class BankAccounts {
 
     @Column(name = "account_number")
     private String accountNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_bank_account_id")
+    private BankAccount bankAccount;
+
 
     @ManyToOne
     @JoinColumn(name = "client_account_id")

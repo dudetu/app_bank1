@@ -22,11 +22,37 @@ public class CreditCardTopUp {
     @JoinColumn(name = "credit_card_id")
     private CreditCards creditCard;
 
+    @ManyToOne
+    @JoinColumn(name = "bank_account_id")
+    private BankAccounts bankAccount;
+
+
+
     @Column(name = "amount")
     private BigDecimal amount;
 
     @Column(name = "user_email")
     private String userEmail;
+
+    /**
+     * Gets the bank account associated with the top-up.
+     *
+     * @return The bank account.
+     */
+    public BankAccounts getBankAccount() {
+        return bankAccount;
+    }
+
+    /**
+     * Sets the bank account for the top-up.
+     *
+     * @param bankAccount The bank account to set.
+     */
+    public void setBankAccount(BankAccounts bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+
 
     /**
      * Gets the ID of the credit card top-up.

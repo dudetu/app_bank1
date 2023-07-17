@@ -1,6 +1,6 @@
 package com.example.app_bank1.other_paymens.categories.entity.payments;
 
-import com.example.app_bank1.other_paymens.categories.entity.BankAccounts;
+import com.example.app_bank1.other_paymens.categories.entity.Transactions.BankAccountEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +31,7 @@ public class BankAccountPayment {
 
     @ManyToOne
     @JoinColumn(name = "bank_account_id")
-    private BankAccounts bankAccount;
+    private BankAccountEntity bankAccount;
 
     /**
      * Returns the ID of the user.
@@ -52,6 +52,5 @@ public class BankAccountPayment {
         return null;
     }
 }
-
 
 

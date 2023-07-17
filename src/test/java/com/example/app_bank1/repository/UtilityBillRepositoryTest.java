@@ -5,14 +5,11 @@ import com.example.app_bank1.other_paymens.categories.repository.UtilityBillRepo
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @DataJpaTest

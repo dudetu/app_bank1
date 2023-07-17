@@ -1,6 +1,6 @@
 package com.example.app_bank1.other_paymens.categories.controller;
 
-import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
+import com.example.app_bank1.accumulation.SavingsAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;

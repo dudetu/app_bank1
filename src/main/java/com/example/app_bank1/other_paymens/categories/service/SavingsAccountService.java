@@ -1,8 +1,7 @@
 package com.example.app_bank1.other_paymens.categories.service;
 
-import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
+import com.example.app_bank1.accumulation.SavingsAccount;
 import com.example.app_bank1.other_paymens.categories.repository.SavingsAccountRepository;
-import jakarta.persistence.Cacheable;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;

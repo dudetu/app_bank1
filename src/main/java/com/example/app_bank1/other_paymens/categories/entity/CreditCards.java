@@ -22,8 +22,15 @@ public class CreditCards {
     private String creditCardNumber;
 
     @ManyToOne
+    @JoinColumn(name = "bank_account_id")
+    private BankAccounts bankAccount;
+
+
+    @ManyToOne
     @JoinColumn(name = "parent_credit_card_id")
     private CreditCards parentCreditCard;
+
+
 
     @ManyToOne
     @JoinColumn(name = "client_account_id")
@@ -37,6 +44,25 @@ public class CreditCards {
 
     @OneToOne(mappedBy = "creditCard", cascade = CascadeType.ALL)
     private CreditLimit creditLimit;
+
+
+    /**
+     * Gets the bank account associated with the credit card.
+     *
+     * @return The bank account.
+     */
+    public BankAccounts getBankAccount() {
+        return bankAccount;
+    }
+
+    /**
+     * Sets the bank account for the credit card.
+     *
+     * @param bankAccount The bank account to set.
+     */
+    public void setBankAccount(BankAccounts bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
     /**
      * Gets the ID of the credit card.

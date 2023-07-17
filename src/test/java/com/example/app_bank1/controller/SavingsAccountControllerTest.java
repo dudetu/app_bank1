@@ -3,7 +3,7 @@ package com.example.app_bank1.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
+import com.example.app_bank1.accumulation.SavingsAccount;
 import com.example.app_bank1.other_paymens.categories.controller.SavingsAccountController;
 import com.example.app_bank1.other_paymens.categories.service.SavingsAccountService;
 import org.junit.jupiter.api.BeforeEach;

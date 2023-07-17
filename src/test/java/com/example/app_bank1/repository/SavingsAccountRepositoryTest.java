@@ -1,7 +1,7 @@
 
 package com.example.app_bank1.repository;
 
-import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
+import com.example.app_bank1.accumulation.SavingsAccount;
 import com.example.app_bank1.other_paymens.categories.repository.SavingsAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

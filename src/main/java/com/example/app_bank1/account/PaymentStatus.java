@@ -1,4 +1,4 @@
-package com.example.app_bank1.PaymentStatus;
+package com.example.app_bank1.account;
 
 public class PaymentStatus {
     public static final String SUCCESS = "SUCCESS";

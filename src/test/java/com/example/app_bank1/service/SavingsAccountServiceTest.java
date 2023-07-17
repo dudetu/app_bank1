@@ -2,7 +2,7 @@ package com.example.app_bank1.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.example.app_bank1.other_paymens.categories.accumulation.SavingsAccount;
+import com.example.app_bank1.accumulation.SavingsAccount;
 import com.example.app_bank1.other_paymens.categories.repository.SavingsAccountRepository;
 import com.example.app_bank1.other_paymens.categories.service.SavingsAccountService;
 import org.junit.jupiter.api.BeforeEach;

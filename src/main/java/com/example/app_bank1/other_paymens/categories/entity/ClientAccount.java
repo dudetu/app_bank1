@@ -1,5 +1,8 @@
 package com.example.app_bank1.other_paymens.categories.entity;
 
+import com.example.app_bank1.other_paymens.categories.entity.Transactions.BankAccountEntity;
+import com.example.app_bank1.other_paymens.categories.entity.Transactions.CreditCard;
+import com.example.app_bank1.other_paymens.categories.entity.Transactions.Transaction;
 import com.example.app_bank1.other_paymens.categories.entity.payments.FinePayment;
 import com.example.app_bank1.other_paymens.categories.entity.payments.IbanPayment;
 import com.example.app_bank1.other_paymens.categories.entity.payments.PaymentRequest;
@@ -9,14 +12,11 @@ import lombok.Data;
 import java.util.List;
 
 
-/**
- * Represents a client account.
- */
-
 @Data
 @Entity
 @Table(name = "client_account")
 public class ClientAccount {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,14 +34,17 @@ public class ClientAccount {
     @Column(name = "phone")
     private String phone;
 
+    @OneToMany(mappedBy = "clientAccount")
+    private List<Transaction> transactions;
 
-
+    @OneToMany(mappedBy = "clientAccount")
+    private List<CreditCard> creditCard;
 
     @OneToMany(mappedBy = "clientAccount", cascade = CascadeType.ALL)
-    private List<BankAccounts> bankAccounts;
+    private List<BankAccountEntity> bankAccounts;
 
     @OneToMany(mappedBy = "clientAccount", cascade = CascadeType.ALL)
-    private List<CreditCards> creditCards;
+    private List<CreditCard> creditCards;
 
     @OneToMany(mappedBy = "clientAccount", cascade = CascadeType.ALL)
     private List<FinePayment> finePayments;
@@ -102,7 +105,7 @@ public class ClientAccount {
      *
      * @return The list of bank accounts.
      */
-    public List<BankAccounts> getBankAccounts() {
+    public List<BankAccountEntity> getBankAccounts() {
         return bankAccounts;
     }
 
@@ -111,7 +114,7 @@ public class ClientAccount {
      *
      * @param bankAccounts The list of bank accounts to set.
      */
-    public void setBankAccounts(List<BankAccounts> bankAccounts) {
+    public void setBankAccounts(List<BankAccountEntity> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
 
@@ -120,7 +123,7 @@ public class ClientAccount {
      *
      * @return The list of credit cards.
      */
-    public List<CreditCards> getCreditCards() {
+    public List<CreditCard> getCreditCards() {
         return creditCards;
     }
 
@@ -129,7 +132,7 @@ public class ClientAccount {
      *
      * @param creditCards The list of credit cards to set.
      */
-    public void setCreditCards(List<CreditCards> creditCards) {
+    public void setCreditCards(List<CreditCard> creditCards) {
         this.creditCards = creditCards;
     }
 
@@ -241,5 +244,4 @@ public class ClientAccount {
         this.accountTransfers = accountTransfers;
     }
 }
-
 
