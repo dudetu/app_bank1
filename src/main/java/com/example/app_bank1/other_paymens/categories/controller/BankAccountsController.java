@@ -4,6 +4,7 @@ package com.example.app_bank1.other_paymens.categories.controller;
 import com.example.app_bank1.other_paymens.categories.entity.BankAccounts;
 import com.example.app_bank1.other_paymens.categories.entity.ClientAccount;
 import com.example.app_bank1.other_paymens.categories.service.BankAccountsService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
